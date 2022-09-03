@@ -1,8 +1,9 @@
 import React from 'react'
+import PageTranslator from '../components/PageComponents/PageTranslator/PageTranslator'
 
 const Translator = () => {
 	return (
-		<div>Translator</div>
+		<PageTranslator />
 	)
 }
 

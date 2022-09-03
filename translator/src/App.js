@@ -1,5 +1,5 @@
 import React from 'react'
-import { BrowserRouter, Routes, Route, Link } from 'react-router-dom'
+import { BrowserRouter, Routes, Route } from 'react-router-dom'
 import Error from './pages/Error';
 import Favourites from './pages/Favourites';
 import FavouritesId from './pages/FavouritesId';
