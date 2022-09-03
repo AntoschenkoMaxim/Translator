@@ -1,0 +1,14 @@
+.textarea {
+	padding: 8px 18px;
+	width: 400px;
+	resize: none;
+	border: 1px solid #0070f3;
+	border-radius: 7px;
+	font-size: 16px;
+	font-weight: 400;
+	height: 200px;
+}
+
+.textarea:focus {
+	outline: 2px solid #0070f3;
+}
