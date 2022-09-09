@@ -11,4 +11,15 @@ export default class TranslatorService {
 		})
 		return response
 	}
+
+	static async detectLanguage() {
+		const response = await axios.post('https://deep-translate1.p.rapidapi.com/language/translate/v2/detect', {
+			headers: {
+				'X-RapidAPI-Key': 'a0e3f8f0b9mshf3cfa708809408dp140f77jsnfcfcd331a786',
+				'X-RapidAPI-Host': 'deep-translate1.p.rapidapi.com',
+			},
+			data: '[{ "Text": "Ich würde wirklich gern Ihr Auto um den Block fahren ein paar Mal." }]'
+		})
+		return response
+	}
 }
