@@ -1,0 +1,26 @@
+.translate__form {
+	display: flex;
+	justify-content: center;
+	height: 100vh;
+	align-items: center;
+}
+
+.translate__switch {
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	justify-content: center;
+	padding: 45px 30px;
+	border-radius: 15px;
+	background-color: white;
+}
+
+.translate__container {
+	padding: 15px;
+}
+
+.translate__container .translate__icon {
+	width: 25px;
+	height: 25px;
+	color: #696969;
+}
