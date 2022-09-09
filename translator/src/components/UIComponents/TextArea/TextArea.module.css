@@ -1,14 +1,16 @@
 .textarea {
 	padding: 8px 18px;
-	width: 400px;
+	width: 250px;
+	height: 150px;
+	border-radius: 10px;
+	border: none;
+	outline: none;
 	resize: none;
-	border: 1px solid #0070f3;
-	border-radius: 7px;
-	font-size: 16px;
-	font-weight: 400;
-	height: 200px;
+	overflow: auto;
+	font-size: 24px;
+	margin-top: 10px;
 }
 
-.textarea:focus {
-	outline: 2px solid #0070f3;
+.outputTextarea textarea {
+	background-color: aliceblue !important;
 }
