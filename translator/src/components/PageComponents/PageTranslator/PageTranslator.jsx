@@ -1,8 +1,42 @@
 import React from 'react'
+import { useState, useEffect } from 'react'
+import classes from './PageTranslator.module.css'
+import TranslationForm from '../../CompositeComponents/TranslationForm/TranslationForm'
+import TranslationList from '../../CompositeComponents/TranslationList/TranslationList'
+import { IoTrashOutline } from 'react-icons/io5'
 
-const PageTranslator = () => {
+function PageTranslator() {
+
+  const [translates, setTranslates] = useState([])
+  const [inputLanguage, setInputLanguage] = useState({ value: 'en', language: 'English' })
+  const [outputLanguage, setOutputLanguage] = useState({ value: 'ru', language: 'Russian' })
+  const [languages, setLanguages] = useState([])
+  const [textForTranslation, setTextForTranslation] = useState('')
+  const [translatedText, setTranslatedText] = useState('')
+
+
   return (
-	<div>PageTranslator</div>
+    <div className={classes.container}>
+      <div className={classes.translation}>
+        <TranslationForm
+          languages={languages.map(l => ({ value: l.language, label: l.name }))}
+          textForTranslation={textForTranslation}
+          setTextForTranslation={setTextForTranslation}
+          translatedText={translatedText}
+          inputLanguage={inputLanguage}
+          outputLanguage={outputLanguage}
+          setInputLanguage={setInputLanguage}
+          setOutputLanguage={setOutputLanguage}
+        />
+
+
+        <div className={classes.translation__list}>
+          <TranslationList translates={translates} title='Translation history: ' />
+          <div className={classes.history__clear}>Clear<IoTrashOutline /></div>
+        </div>
+
+      </div>
+    </div >
   )
 }
 

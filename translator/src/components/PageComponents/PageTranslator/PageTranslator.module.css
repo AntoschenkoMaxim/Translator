@@ -1,0 +1,27 @@
+.container {
+	height: 100vh;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
+.traslation {
+	display: flex;
+	width: 652px;
+	height: 360px;
+}
+
+
+
+/* .history__clear {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	gap: 5px;
+	cursor: pointer;
+	transition: all 0.3s;
+}
+
+.history__clear:hover {
+	color: #0070f3;
+} */
