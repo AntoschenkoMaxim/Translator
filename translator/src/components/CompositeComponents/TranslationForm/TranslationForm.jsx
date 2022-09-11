@@ -6,7 +6,9 @@ import { TbSwitchHorizontal } from 'react-icons/tb'
 import { IoCopyOutline, IoStarOutline } from 'react-icons/io5'
 import { useState } from 'react'
 
-const TranslationForm = ({ }) => {
+const TranslationForm = ({
+	debounce,
+}) => {
 
 	const [translate, setTranslate] = useState({ inputValue: '', outputValue: '' })
 
@@ -17,6 +19,7 @@ const TranslationForm = ({ }) => {
 					<TextArea
 						style='inputTextarea'
 						type='text'
+						debounce={debounce}
 					/>
 					<div className={classes.translate__container}><TbSwitchHorizontal className={classes.translate__icon} /></div>
 					<TextArea

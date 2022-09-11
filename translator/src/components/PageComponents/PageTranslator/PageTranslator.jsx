@@ -15,10 +15,12 @@ function PageTranslator() {
   const [translatedText, setTranslatedText] = useState('')
 
 
+  const debouncedQuery = useDebounce(translate, 300)
   return (
     <div className={classes.container}>
       <div className={classes.translation}>
         <TranslationForm
+          debounce={debouncedQuery}
           languages={languages.map(l => ({ value: l.language, label: l.name }))}
           textForTranslation={textForTranslation}
           setTextForTranslation={setTextForTranslation}

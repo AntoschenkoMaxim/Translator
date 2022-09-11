@@ -13,6 +13,7 @@ const TextArea = ({
 	setTranslatedText,
 	detection,
 	setDetection,
+	debounce,
 	...props }) => {
 
 	const handleClick = () => {
@@ -22,6 +23,7 @@ const TextArea = ({
 
 	const handleChange = (e) => {
 		setTextForTranslation(e.target.value)
+		debounce(e.target.value)
 	}
 
 	return (
