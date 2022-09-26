@@ -1,8 +1,8 @@
 .translate__form {
-	display: flex;
-	justify-content: center;
-	height: 100vh;
-	align-items: center;
+	padding-top: 0px;
+	padding-bottom: 0px;
+	padding-left: calc(15px + (35-15) * ((100vw - 320px) / (1200-320)));
+	padding-right: calc(15px + (35-15) * ((100vw - 320px) / (1200-320)));
 }
 
 .translate__switch {
@@ -10,9 +10,13 @@
 	flex-direction: row;
 	align-items: center;
 	justify-content: center;
-	padding: 45px 30px;
-	border-radius: 15px;
-	background-color: white;
+	padding-left: calc(15px + (35-15) * ((100vw - 320px) / (1200-320)));
+	padding-right: calc(15px + (35-15) * ((100vw - 320px) / (1200-320)));
+	padding-bottom: calc(30px + (35-30) * ((100vw - 320px) / (1200-320)));
+	padding-top: calc(15px + (35-15) * ((100vw - 320px) / (1200-320)));
+	border-radius: calc(5px + (10-5) * ((100vw - 320px) / (1200-320)));
+	background-color: var(--background-secondary);
+	line-height: 115%;
 }
 
 .translate__container {
@@ -22,5 +26,29 @@
 .translate__container .translate__icon {
 	width: 25px;
 	height: 25px;
-	color: #696969;
+	color: var(--icon-primary);
+	cursor: pointer;
+	transition: all 0.3s;
+}
+
+.translate__icon:hover {
+	color: var(--primary);
+}
+
+@media (max-width: 667px) {
+	.translate__switch {
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		justify-content: center;
+		padding-right: calc(15px + (35-15) * ((100vw - 320px) / (1200-320)));
+		padding-left: calc(15px + (35-15) * ((100vw - 320px) / (1200-320)));
+		padding-bottom: calc(30px + (35-30) * ((100vw - 320px) / (1200-320)));
+		padding-top: calc(30px + (35-30) * ((100vw - 320px) / (1200-320)));
+		border-radius: calc(5px + (10-5) * ((100vw - 320px) / (1200-320)));
+	}
+
+	.translate__container .translate__icon {
+		transform: rotate(0.75turn)
+	}
 }
