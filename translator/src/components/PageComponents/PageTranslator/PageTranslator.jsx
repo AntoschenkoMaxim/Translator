@@ -13,6 +13,8 @@ function PageTranslator() {
   const [languages, setLanguages] = useState([])
   const [textForTranslation, setTextForTranslation] = useState('')
   const [translatedText, setTranslatedText] = useState('')
+  const [historyItems, setHistoryItems] = useLocalStorageCustom('historyItems', [])
+  const [favouriteItems, setFavouriteItems] = useLocalStorageCustom('favouriteItems', [])
   const [fetchLanguages, isLoading, isError] = useFetching(async () => {
     const response = await TranslatorService.getAllLanguages()
     console.log(response.data)
@@ -80,6 +82,15 @@ function PageTranslator() {
   }
 
   const debouncedQuery = useDebounce(translate, 300)
+
+  const createHistoryItem = (newHistoryItem) => {
+    setHistoryItems([...historyItems, newHistoryItem])
+  }
+
+  const createFavouriteItem = (newFavouriteItem) => {
+    setFavouriteItems([...favouriteItems, newFavouriteItem])
+  }
+
   useEffect(() => {
     fetchLanguages()
   }, [])
@@ -96,6 +107,8 @@ function PageTranslator() {
           outputLanguage={outputLanguage}
           setInputLanguage={setInputLanguage}
           setOutputLanguage={setOutputLanguage}
+          createFavouriteItem={createFavouriteItem}
+          createHistoryItem={createHistoryItem}
         />
 
 
