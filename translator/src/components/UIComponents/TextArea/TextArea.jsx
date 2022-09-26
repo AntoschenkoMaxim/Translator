@@ -80,6 +80,13 @@ const TextArea = ({
 			draggable: true,
 			progress: undefined,
 		});
+	}
+
+	const clearTextarea = () => {
+		setTranslatedText('')
+		setTextForTranslation('')
+	}
+
 	useEffect(() => {
 		setHistoryItem({ inputLanguage: inputLanguage.label, outputLanguage: outputLanguage.label, textForTranslation: textForTranslation, translatedText })
 		setFavouriteItem({ inputLanguage: inputLanguage.label, outputLanguage: outputLanguage.label, textForTranslation: textForTranslation, translatedText: translatedText })
@@ -93,6 +100,7 @@ const TextArea = ({
 						<div onClick={successToast}><MdOutlineContentCopy className={classes.translate__icon} /></div>
 					</CopyToClipboard>
 					<div onClick={addFavouriteItem}><ImStarEmpty className={classes.translate__icon} /></div>
+					<div onClick={clearTextarea}><CgClose className={classes.translate__icon} /></div>
 			<textarea
 				placeholder={style === 'inputTextarea' ? 'Writing text...' : 'Translation'}
 				type='text'
