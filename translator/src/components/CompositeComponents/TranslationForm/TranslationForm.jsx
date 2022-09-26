@@ -20,7 +20,12 @@ const TranslationForm = ({
 	debounce,
 }) => {
 
-	const [translate, setTranslate] = useState({ inputValue: '', outputValue: '' })
+	const handleSwitch = () => {
+		setInputLanguage({ value: outputLanguage.value, label: outputLanguage.label })
+		setOutputLanguage({ value: inputLanguage.value, label: inputLanguage.label })
+		setTextForTranslation(translatedText)
+		setTranslatedText(textForTranslation)
+	}
 
 	return (
 		<form>
@@ -39,7 +44,7 @@ const TranslationForm = ({
 						setTranslatedText={setTranslatedText}
 						debounce={debounce}
 					/>
-					<div className={classes.translate__container}><TbSwitchHorizontal className={classes.translate__icon} /></div>
+					<div className={classes.translate__container} onClick={handleSwitch}><TbSwitchHorizontal className={classes.translate__icon} /></div>
 					<TextArea
 						style='outputTextarea'
 						type='text'
