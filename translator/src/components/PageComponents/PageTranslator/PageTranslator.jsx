@@ -4,6 +4,8 @@ import classes from './PageTranslator.module.css'
 import TranslationForm from '../../CompositeComponents/TranslationForm/TranslationForm'
 import TranslationList from '../../CompositeComponents/TranslationList/TranslationList'
 import { IoTrashOutline } from 'react-icons/io5'
+import { toast, ToastContainer } from 'react-toastify'
+import 'react-toastify/dist/ReactToastify.css'
 
 function PageTranslator() {
 
@@ -21,6 +23,7 @@ function PageTranslator() {
     const arrOfLang = Object.keys(response.data.languages).map(key => response.data.languages[key])
     setLanguages(arrOfLang)
   })
+
   const detect = (textForTranslation) => {
     const options = {
       method: 'POST',
@@ -132,7 +135,18 @@ function PageTranslator() {
         </div>
 
       </div>
-    </div >
+      <ToastContainer
+        position="top-center"
+        autoClose={1000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+      />
+    </div>
   )
 }
 
