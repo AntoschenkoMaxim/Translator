@@ -40,7 +40,44 @@ function PageTranslator() {
     });
   }
 
+  const translate = (textForTranslation) => {
+    if (detectedLanguage !== inputLanguage.value) {
+      toast.error('Change keyboard layout!', {
+        theme: 'dark',
+        position: 'bottom-center',
+        autoClose: 1000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+      });
+    }
+    else {
+      const options = {
+        method: 'POST',
+        url: 'https://microsoft-translator-text.p.rapidapi.com/translate',
+        params: {
+          'to[0]': `${outputLanguage.value}`,
+          'api-version': '3.0',
+          profanityAction: 'NoAction',
+          textType: 'plain'
+        },
+        headers: {
+          'content-type': 'application/json',
           'X-RapidAPI-Key': process.env.REACT_APP_RapidAPI_Key,
+          'X-RapidAPI-Host': 'microsoft-translator-text.p.rapidapi.com'
+        },
+        data: `[{"Text":"${textForTranslation}"}]`
+      };
+
+      axios.request(options).then(function (response) {
+        setTranslatedText(response.data[0].translations[0].text)
+      }).catch(function (error) {
+        console.error(error);
+      });
+    }
+  }
 
   const debouncedQuery = useDebounce(translate, 300)
   return (
