@@ -51,6 +51,7 @@ const TextArea = ({
 
 	const handleChange = (e) => {
 		setTextForTranslation(e.target.value)
+		detect(e.target.value)
 		debounce(e.target.value)
 	}
 
@@ -95,18 +96,45 @@ const TextArea = ({
 
 	return (
 		<div className={style}>
-			<Select value={selectedLanguage} onChange={setSelectedLanguage} options={languages} />
+			<Select
+				value={style === 'inputTextarea'
+					? { value: inputLanguage.value, label: inputLanguage.label }
+					: { value: outputLanguage.value, label: outputLanguage.label }
+				}
+				onChange={setSelectedLanguage}
+				options={languages}
+				theme={(theme) => ({
+					...theme,
+					borderRadius: 5,
+					colors: {
+						...theme.colors,
+						primary: 'var(--text-placeholder)',
+						primary25: 'var(--background-secondary)',
+						primary50: 'var(--primary)',
+						neutral0: 'var(--text-secondary)',
+						neutral20: 'var(--text-placeholder)',
+						neutral60: 'var(--background-primary)',
+						neutral80: 'var(--text-placeholder)'
+					},
+				})}
+			/>
+			{style === 'outputTextarea'
+				? <div className={classes.translate__icons}>
 					<CopyToClipboard text={translatedText}>
 						<div onClick={successToast}><MdOutlineContentCopy className={classes.translate__icon} /></div>
 					</CopyToClipboard>
 					<div onClick={addFavouriteItem}><ImStarEmpty className={classes.translate__icon} /></div>
+				</div>
+				: <div className={classes.translate__icons}>
 					<div onClick={clearTextarea}><CgClose className={classes.translate__icon} /></div>
+				</div>
+			}
 			<textarea
 				placeholder={style === 'inputTextarea' ? 'Writing text...' : 'Translation'}
 				type='text'
 				className={classes.textarea}
-				disabled={style === classes.outputTextarea}
-				value={style === 'input' ? textForTranslation : translatedText}
+				disabled={style === 'outputTextarea'}
+				value={style === 'inputTextarea' ? textForTranslation : translatedText}
 				onChange={handleChange}
 				onBlur={addHistoryItem}
 				{...props}
