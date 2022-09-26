@@ -7,7 +7,7 @@ import { IoTrashOutline } from 'react-icons/io5'
 
 function PageTranslator() {
 
-  const [translates, setTranslates] = useState([])
+  const [detectedLanguage, setDetectedLanguage] = useState({ value: '' })
   const [inputLanguage, setInputLanguage] = useState({ value: 'en', language: 'English' })
   const [outputLanguage, setOutputLanguage] = useState({ value: 'ru', language: 'Russian' })
   const [languages, setLanguages] = useState([])
