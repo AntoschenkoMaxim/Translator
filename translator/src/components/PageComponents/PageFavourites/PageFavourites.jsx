@@ -10,6 +10,10 @@ import { BsLightningChargeFill, BsLightningCharge } from 'react-icons/bs'
 
 const PageFavourites = () => {
 
+	const [favouriteItems, setFavouriteItems] = useLocalStorageCustom('favouriteItems', [])
+	const [filter, setFilter] = useState({ sort: '', query: '' })
+
+	const sortedAndSearchedItems = useItems(favouriteItems, filter.sort, filter.query)
 	const defaultDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
 	const [theme, setTheme] = useLocalStorage('theme', defaultDark ? 'dark' : 'light');
 
