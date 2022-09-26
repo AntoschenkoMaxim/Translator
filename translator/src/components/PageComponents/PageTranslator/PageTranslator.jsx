@@ -80,6 +80,9 @@ function PageTranslator() {
   }
 
   const debouncedQuery = useDebounce(translate, 300)
+  useEffect(() => {
+    fetchLanguages()
+  }, [])
   return (
     <div className={classes.container}>
       <div className={classes.translation}>
