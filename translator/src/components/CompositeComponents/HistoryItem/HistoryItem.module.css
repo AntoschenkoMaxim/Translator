@@ -1,0 +1,85 @@
+.translation__block {
+	margin: 0px 0px 20px 0px;
+}
+
+.translation__container {
+	padding-top: 0px;
+	padding-bottom: 0px;
+	padding-left: calc(15px + (35-15) * ((100vw - 320px) / (1200-320)));
+	padding-right: calc(15px + (35-15) * ((100vw - 320px) / (1200-320)));
+	margin: 0px auto;
+}
+
+.translation__body {
+	padding: calc(5px + (8-5) * ((100vw - 320px) / (1200-320)));
+	border-radius: calc(5px + (10-5) * ((100vw - 320px) / (1200-320)));
+	background-color: var(--background-secondary);
+}
+
+.translation__inputLanguage,
+.translation__outputLanguage {
+	font-size: calc(14px + (10-14) * ((75vw - 320px) / (1200-320)));
+	padding: calc(3px + (5-3) * ((100vw - 320px) / (1200-320)));
+	border-radius: calc(5px + (3-5) * ((100vw - 320px) / (1200-320)));
+	background-color: var(--text-secondary);
+	color: var(--text-placeholder);
+}
+
+.container {
+	display: flex;
+	align-items: flex-start;
+	gap: 5px;
+}
+
+.input__block {
+	width: 50%;
+	display: flex;
+	flex-direction: column;
+	align-items: flex-start;
+	gap: 5px;
+}
+
+.output__block {
+	width: 50%;
+	display: flex;
+	flex-direction: column-reverse;
+	align-items: flex-start;
+	gap: 5px;
+}
+
+.translation__textForTranslation,
+.translation__translatedText {
+	font-size: calc(12px + (12-12) * ((75vw - 320px) / (1200-320)));
+	background-color: var(--text-secondary);
+	color: var(--text-placeholder);
+	border-radius: calc(5px + (3-5) * ((100vw - 320px) / (1200-320)));
+	padding: 5px;
+}
+
+.translation__icon {
+	width: 25px;
+	height: 25px;
+	color: var(--icon-primary);
+}
+
+@media (max-width: 1200px) {
+	.container {
+		display: flex;
+		align-items: flex-start;
+		gap: 5px;
+	}
+
+	.input__block {
+		display: flex;
+		flex-direction: column;
+		align-items: flex-start;
+		gap: 5px;
+	}
+
+	.output__block {
+		display: flex;
+		flex-direction: column-reverse;
+		align-items: flex-start;
+		gap: 5px;
+	}
+}
