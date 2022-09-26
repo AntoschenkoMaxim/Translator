@@ -1,27 +1,19 @@
-.container {
-	height: 100vh;
-	display: flex;
-	align-items: center;
-	justify-content: center;
+.theme {
+	position: relative;
 }
 
-.traslation {
-	display: flex;
-	width: 652px;
-	height: 360px;
-}
-
-
-
-/* .history__clear {
-	display: flex;
-	align-items: center;
-	justify-content: center;
-	gap: 5px;
+.theme__icon {
 	cursor: pointer;
+	color: var(--text-placeholder);
+	position: absolute;
+	right: 0;
+	top: 0;
+	height: 30px;
+	width: 30px;
+	margin: 15px;
 	transition: all 0.3s;
 }
 
-.history__clear:hover {
-	color: #0070f3;
-} */
+.theme__icon:hover {
+	color: var(--primary)
+}
