@@ -13,7 +13,9 @@ function PageTranslator() {
   const [languages, setLanguages] = useState([])
   const [textForTranslation, setTextForTranslation] = useState('')
   const [translatedText, setTranslatedText] = useState('')
+        'X-RapidAPI-Key': process.env.REACT_APP_RapidAPI_Key,
 
+          'X-RapidAPI-Key': process.env.REACT_APP_RapidAPI_Key,
 
   const debouncedQuery = useDebounce(translate, 300)
   return (

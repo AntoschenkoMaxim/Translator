@@ -7,6 +7,16 @@ import { IoCopyOutline, IoStarOutline } from 'react-icons/io5'
 import { useState } from 'react'
 
 const TranslationForm = ({
+	create,
+	languages,
+	textForTranslation,
+	setTextForTranslation,
+	translatedText,
+	setTranslatedText,
+	inputLanguage,
+	outputLanguage,
+	setInputLanguage,
+	setOutputLanguage,
 	debounce,
 }) => {
 
@@ -19,6 +29,14 @@ const TranslationForm = ({
 					<TextArea
 						style='inputTextarea'
 						type='text'
+						// onBlur={addFavouriteTranslation}
+						inputLanguage={inputLanguage}
+						outputLanguage={outputLanguage}
+						setSelectedLanguage={setInputLanguage}
+						languages={languages}
+						textForTranslation={textForTranslation}
+						setTextForTranslation={setTextForTranslation}
+						setTranslatedText={setTranslatedText}
 						debounce={debounce}
 					/>
 					<div className={classes.translate__container}><TbSwitchHorizontal className={classes.translate__icon} /></div>
