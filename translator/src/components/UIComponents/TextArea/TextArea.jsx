@@ -54,6 +54,22 @@ const TextArea = ({
 		debounce(e.target.value)
 	}
 
+	const addHistoryItem = (e) => {
+		e.preventDefault()
+		const newHistoryObj = {
+			...historyItem, id: Date.now()
+		}
+		console.log(newHistoryObj)
+		createHistoryItem(newHistoryObj)
+	}
+
+	const addFavouriteItem = (e) => {
+		e.preventDefault()
+		const newFavouriteObj = {
+			...favouriteItem, id: Date.now()
+		}
+		console.log(newFavouriteObj)
+		createFavouriteItem(newFavouriteObj)
 		toast.success('Added to favourites!', {
 			theme: 'dark',
 			position: 'bottom-center',
@@ -64,12 +80,19 @@ const TextArea = ({
 			draggable: true,
 			progress: undefined,
 		});
+	useEffect(() => {
+		setHistoryItem({ inputLanguage: inputLanguage.label, outputLanguage: outputLanguage.label, textForTranslation: textForTranslation, translatedText })
+		setFavouriteItem({ inputLanguage: inputLanguage.label, outputLanguage: outputLanguage.label, textForTranslation: textForTranslation, translatedText: translatedText })
+	}, [inputLanguage, outputLanguage, textForTranslation, translatedText])
+
+
 	return (
 		<div className={style}>
 			<Select value={selectedLanguage} onChange={setSelectedLanguage} options={languages} />
 					<CopyToClipboard text={translatedText}>
 						<div onClick={successToast}><MdOutlineContentCopy className={classes.translate__icon} /></div>
 					</CopyToClipboard>
+					<div onClick={addFavouriteItem}><ImStarEmpty className={classes.translate__icon} /></div>
 			<textarea
 				placeholder={style === 'inputTextarea' ? 'Writing text...' : 'Translation'}
 				type='text'
@@ -77,6 +100,7 @@ const TextArea = ({
 				disabled={style === classes.outputTextarea}
 				value={style === 'input' ? textForTranslation : translatedText}
 				onChange={handleChange}
+				onBlur={addHistoryItem}
 				{...props}
 			/>
 			<ToastContainer
