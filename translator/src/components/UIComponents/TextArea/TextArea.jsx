@@ -1,13 +1,22 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import classes from './TextArea.module.css'
 import Select from 'react-select'
+import { useState } from 'react'
+import { MdOutlineContentCopy } from 'react-icons/md'
+import { ImStarEmpty } from 'react-icons/im'
+import { CgClose } from 'react-icons/cg'
+import { CopyToClipboard } from 'react-copy-to-clipboard'
+import { useLocalStorageCustom } from '../../hooks/useLocalStorage'
 import { toast, ToastContainer } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css'
 
 const TextArea = ({
-	selectedLanguage,
-	setSelectedLanguage,
 	languages,
+	setSelectedLanguage,
+	selectedLanguage,
+	inputLanguage,
+	outputLanguage,
+	setInputLanguage,
 	style,
 	textForTranslation,
 	setTextForTranslation,
@@ -15,12 +24,18 @@ const TextArea = ({
 	setTranslatedText,
 	detection,
 	setDetection,
+	checkLanguages,
+	detect,
 	debounce,
+	createFavouriteItem,
+	createHistoryItem,
+	historyItems,
+	setHistoryItems,
 	...props }) => {
 
-	const handleClick = () => {
-		setTextForTranslation()
-		setTranslatedText()
+	const [historyItem, setHistoryItem] = useLocalStorageCustom('history', { inputLanguage: '', outputLanguage: '', textForTranslation: '', translatedText: '' })
+	const [favouriteItem, setFavouriteItem] = useLocalStorageCustom('favourite', { inputLanguage: '', outputLanguage: '', textForTranslation: '', translatedText: '' })
+
 	const successToast = () => {
 		toast.success('Copied!', {
 			theme: 'dark',
