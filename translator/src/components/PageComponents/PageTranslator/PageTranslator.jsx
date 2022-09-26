@@ -27,6 +27,10 @@ function PageTranslator() {
   const [translatedText, setTranslatedText] = useState('')
   const [historyItems, setHistoryItems] = useLocalStorageCustom('historyItems', [])
   const [favouriteItems, setFavouriteItems] = useLocalStorageCustom('favouriteItems', [])
+  const [filter, setFilter] = useState({ sort: '', query: '' })
+
+  const sortedAndSearchedItems = useItems(historyItems, filter.sort, filter.query)
+
   const [fetchLanguages, isLoading, isError] = useFetching(async () => {
     const response = await TranslatorService.getAllLanguages()
     console.log(response.data)
