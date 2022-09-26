@@ -29,4 +29,29 @@ h6 {
 }
 
 :root {
+  --background-primary: #e6e6e7;
+  --background-secondary: white;
+  --text-primary: black;
+  --text-secondary: #f4f4f4;
+  --text-placeholder: #ababab;
+  --icon-primary: rgb(73, 72, 72);
+  --primary: #0070f3;
+}
+
+[data-theme='dark'] {
+  --background-primary: #111111;
+  --background-secondary: #232323;
+  --text-primary: white;
+  --text-secondary: rgb(73, 72, 72);
+  --text-placeholder: #929293;
+  --icon-primary: rgb(73, 72, 72);
+  --primary: #0070f3;
+}
+
+.page {
+  min-height: 100vh;
+  padding: 25px 0px;
+  color: var(--text-primary);
+  background-color: var(--background-primary);
+  transition: all .5s;
 }
