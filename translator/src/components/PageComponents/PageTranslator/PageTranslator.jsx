@@ -91,12 +91,26 @@ function PageTranslator() {
     setFavouriteItems([...favouriteItems, newFavouriteItem])
   }
 
+  //get languages
   useEffect(() => {
     fetchLanguages()
   }, [])
+
+
+  //switch theme
+  const defaultDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+  const [theme, setTheme] = useLocalStorage('theme', defaultDark ? 'dark' : 'light');
+
+  const switchTheme = () => {
+    const newTheme = theme === 'light' ? 'dark' : 'light'
+    setTheme(newTheme)
+  }
+
+  console.log(historyItems)
+
   return (
-    <div className={classes.container}>
-      <div className={classes.translation}>
+    <div className='page' data-theme={theme}>
+      <div className={classes.theme} onClick={switchTheme}>{theme === 'dark' ? <BsLightningCharge className={classes.theme__icon} /> : <BsLightningChargeFill className={classes.theme__icon} />}</div>
         <TranslationForm
           debounce={debouncedQuery}
           languages={languages.map(l => ({ value: l.language, label: l.name }))}
