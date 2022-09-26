@@ -1,16 +1,50 @@
 .textarea {
+	display: flex;
 	padding: 8px 18px;
-	width: 250px;
+	width: calc(100px + (550-100) * ((100vw - 320px) / (1200-320)));
 	height: 150px;
-	border-radius: 10px;
+	border-radius: calc(5px + (7-5) * ((100vw - 320px) / (1200-320)));
 	border: none;
 	outline: none;
 	resize: none;
 	overflow: auto;
-	font-size: 24px;
-	margin-top: 10px;
+	font-size: calc(12px + (16-12) * ((100vw - 320px) / (1200-320)));
+	background-color: var(--text-secondary);
+	color: var(--text-primary);
 }
 
-.outputTextarea textarea {
-	background-color: aliceblue !important;
+.textarea::placeholder {
+	color: var(--text-placeholder)
+}
+
+.translate__icons {
+	display: flex;
+	flex-direction: row;
+	justify-content: flex-end;
+	align-items: center;
+	margin-top: 10px;
+	gap: 5px;
+}
+
+.translate__icon {
+	width: 15px;
+	height: 15px;
+	cursor: pointer;
+	color: var(--icon-primary);
+	transition: all 0.3s;
+}
+
+.translate__icon:hover {
+	color: var(--primary)
+}
+
+
+@media (max-width: 667px) {
+	.textarea {
+		width: calc(225px + (550-225) * ((100vw - 320px) / (1200-320)));
+		height: 100px;
+		border-radius: calc(5px + (10-5) * ((100vw - 320px) / (1200-320)));
+		font-size: calc(14px + (10-12) * ((100vw - 320px) / (1200-320)));
+	}
+
 }
