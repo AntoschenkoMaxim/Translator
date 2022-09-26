@@ -13,6 +13,12 @@ function PageTranslator() {
   const [languages, setLanguages] = useState([])
   const [textForTranslation, setTextForTranslation] = useState('')
   const [translatedText, setTranslatedText] = useState('')
+  const [fetchLanguages, isLoading, isError] = useFetching(async () => {
+    const response = await TranslatorService.getAllLanguages()
+    console.log(response.data)
+    const arrOfLang = Object.keys(response.data.languages).map(key => response.data.languages[key])
+    setLanguages(arrOfLang)
+  })
         'X-RapidAPI-Key': process.env.REACT_APP_RapidAPI_Key,
 
           'X-RapidAPI-Key': process.env.REACT_APP_RapidAPI_Key,
