@@ -1,9 +1,19 @@
 import React from 'react'
+import '../../../styles/App.css'
 import { useState, useEffect } from 'react'
 import classes from './PageTranslator.module.css'
+import { useFetching } from '../../hooks/useFetching'
+import useDebounce from '../../hooks/useDebounced'
+import TranslatorService from '../../../API/TranslatorService'
 import TranslationForm from '../../CompositeComponents/TranslationForm/TranslationForm'
-import TranslationList from '../../CompositeComponents/TranslationList/TranslationList'
-import { IoTrashOutline } from 'react-icons/io5'
+import axios from 'axios'
+import useLocalStorage from 'use-local-storage'
+import '../../../styles/App.css'
+import { useLocalStorageCustom } from '../../hooks/useLocalStorage'
+import HistoryList from '../../CompositeComponents/HistoryList/HistoryList'
+import { BsLightningChargeFill, BsLightningCharge } from 'react-icons/bs'
+import { useItems } from '../../hooks/useItems'
+import TranslationFilter from '../../CompositeComponents/TranslationFilter/TranslationFilter'
 import { toast, ToastContainer } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css'
 
@@ -114,27 +124,31 @@ function PageTranslator() {
   return (
     <div className='page' data-theme={theme}>
       <div className={classes.theme} onClick={switchTheme}>{theme === 'dark' ? <BsLightningCharge className={classes.theme__icon} /> : <BsLightningChargeFill className={classes.theme__icon} />}</div>
-        <TranslationForm
-          debounce={debouncedQuery}
-          languages={languages.map(l => ({ value: l.language, label: l.name }))}
-          textForTranslation={textForTranslation}
-          setTextForTranslation={setTextForTranslation}
-          translatedText={translatedText}
-          inputLanguage={inputLanguage}
-          outputLanguage={outputLanguage}
-          setInputLanguage={setInputLanguage}
-          setOutputLanguage={setOutputLanguage}
-          createFavouriteItem={createFavouriteItem}
-          createHistoryItem={createHistoryItem}
-        />
-
-
-        <div className={classes.translation__list}>
-          <TranslationList translates={translates} title='Translation history: ' />
-          <div className={classes.history__clear}>Clear<IoTrashOutline /></div>
+      <TranslationForm
+        debounce={debouncedQuery}
+        languages={languages.map(l => ({ value: l.language, label: l.name }))}
+        textForTranslation={textForTranslation}
+        setTextForTranslation={setTextForTranslation}
+        translatedText={translatedText}
+        setTranslatedText={setTranslatedText}
+        inputLanguage={inputLanguage}
+        outputLanguage={outputLanguage}
+        setInputLanguage={setInputLanguage}
+        setOutputLanguage={setOutputLanguage}
+        detect={detect}
+        createFavouriteItem={createFavouriteItem}
+        createHistoryItem={createHistoryItem}
+      />
+      {isError &&
+        <h1>Error: ${isError}</h1>
+      }
+      {isLoading
+        ? <div></div>//прикрутить loader
+        : <div className={classes.translation__list}>
+          <TranslationFilter filter={filter} setFilter={setFilter} title='Filters' button='Favourite' path='/favourites' />
+          <HistoryList historyItems={sortedAndSearchedItems} title='Translation history: ' />
         </div>
-
-      </div>
+      }
       <ToastContainer
         position="top-center"
         autoClose={1000}
