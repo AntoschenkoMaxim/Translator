@@ -19,7 +19,26 @@ function PageTranslator() {
     const arrOfLang = Object.keys(response.data.languages).map(key => response.data.languages[key])
     setLanguages(arrOfLang)
   })
+  const detect = (textForTranslation) => {
+    const options = {
+      method: 'POST',
+      url: 'https://microsoft-translator-text.p.rapidapi.com/Detect',
+      params: { 'api-version': '3.0' },
+      headers: {
+        'content-type': 'application/json',
         'X-RapidAPI-Key': process.env.REACT_APP_RapidAPI_Key,
+        'X-RapidAPI-Host': 'microsoft-translator-text.p.rapidapi.com'
+      },
+      data: `[{"Text":"${textForTranslation}"}]`
+    };
+
+    axios.request(options).then(function (response) {
+      console.log(response.data);
+      setDetectedLanguage(response.data[0].language)
+    }).catch(function (error) {
+      console.error(error);
+    });
+  }
 
           'X-RapidAPI-Key': process.env.REACT_APP_RapidAPI_Key,
 
