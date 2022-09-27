@@ -121,10 +121,21 @@ const TextArea = ({
 			/>
 			{style === 'outputTextarea'
 				? <div className={classes.translate__icons}>
-					<CopyToClipboard text={translatedText}>
-						<div onClick={successToast}><MdOutlineContentCopy className={classes.translate__icon} /></div>
-					</CopyToClipboard>
-					<div onClick={addFavouriteItem}><ImStarEmpty className={classes.translate__icon} /></div>
+					{translatedText ?
+						<>
+							<CopyToClipboard text={translatedText}>
+								<div onClick={successToast}><MdOutlineContentCopy className={classes.translate__icon} /></div>
+							</CopyToClipboard>
+							<div onClick={addFavouriteItem}><ImStarEmpty className={classes.translate__icon} /></div>
+						</>
+						:
+						<>
+							<CopyToClipboard text={translatedText}>
+								<div disabled onClick={errorToast}><MdOutlineContentCopy className={classes.translate__icon} /></div>
+							</CopyToClipboard>
+							<div disabled onClick={errorToast}><ImStarEmpty className={classes.translate__icon} /></div>
+						</>
+					}
 				</div>
 				: <div className={classes.translate__icons}>
 					<div onClick={clearTextarea}><CgClose className={classes.translate__icon} /></div>

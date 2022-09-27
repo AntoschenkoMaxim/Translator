@@ -8,10 +8,9 @@
 	position: absolute;
 	right: 0;
 	top: 0;
-	height: 30px;
-	width: 30px;
-	margin: 15px;
-	transition: all 0.3s;
+	height: calc(15px + (25-15) * ((100vw - 320px) / (1200-320)));
+	width: calc(15px + (25-15) * ((100vw - 320px) / (1200-320)));
+	transition: all 0.5s;
 }
 
 .theme__icon:hover {

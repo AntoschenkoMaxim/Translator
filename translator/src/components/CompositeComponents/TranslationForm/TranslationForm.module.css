@@ -12,7 +12,7 @@
 	justify-content: center;
 	padding-left: calc(15px + (35-15) * ((100vw - 320px) / (1200-320)));
 	padding-right: calc(15px + (35-15) * ((100vw - 320px) / (1200-320)));
-	padding-bottom: calc(30px + (35-30) * ((100vw - 320px) / (1200-320)));
+	padding-bottom: calc(15px + (35-15) * ((100vw - 320px) / (1200-320)));
 	padding-top: calc(15px + (35-15) * ((100vw - 320px) / (1200-320)));
 	border-radius: calc(5px + (10-5) * ((100vw - 320px) / (1200-320)));
 	background-color: var(--background-secondary);
