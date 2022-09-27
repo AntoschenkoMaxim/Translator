@@ -16,6 +16,7 @@ const TranslationForm = ({
 	setOutputLanguage,
 	detect,
 	debounce,
+	create,
 	createFavouriteItem,
 	createHistoryItem,
 }) => {
@@ -31,6 +32,7 @@ const TranslationForm = ({
 		<form>
 			<div className={classes.translate__form}>
 				<div className={classes.translate__switch}>
+					<div></div>
 					<TextArea
 						style='inputTextarea'
 						type='text'
@@ -42,6 +44,7 @@ const TranslationForm = ({
 						setTextForTranslation={setTextForTranslation}
 						setTranslatedText={setTranslatedText}
 						debounce={debounce}
+						create={create}
 						detect={detect}
 						createFavouriteItem={createFavouriteItem}
 						createHistoryItem={createHistoryItem}

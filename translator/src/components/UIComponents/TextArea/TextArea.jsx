@@ -1,7 +1,6 @@
 import React, { useEffect } from 'react'
 import classes from './TextArea.module.css'
 import Select from 'react-select'
-import { useState } from 'react'
 import { MdOutlineContentCopy } from 'react-icons/md'
 import { ImStarEmpty } from 'react-icons/im'
 import { CgClose } from 'react-icons/cg'
@@ -27,13 +26,13 @@ const TextArea = ({
 	checkLanguages,
 	detect,
 	debounce,
+	create,
 	createFavouriteItem,
 	createHistoryItem,
 	historyItems,
 	setHistoryItems,
 	...props }) => {
 
-	const [historyItem, setHistoryItem] = useLocalStorageCustom('history', { inputLanguage: '', outputLanguage: '', textForTranslation: '', translatedText: '' })
 	const [favouriteItem, setFavouriteItem] = useLocalStorageCustom('favourite', { inputLanguage: '', outputLanguage: '', textForTranslation: '', translatedText: '' })
 
 	const successToast = () => {
@@ -49,19 +48,23 @@ const TextArea = ({
 		});
 	}
 
+	const errorToast = () => {
+		toast.error('Empty value!', {
+			theme: 'dark',
+			position: 'bottom-center',
+			autoClose: 1000,
+			hideProgressBar: false,
+			closeOnClick: true,
+			pauseOnHover: true,
+			draggable: true,
+			progress: undefined,
+		});
+	}
+
 	const handleChange = (e) => {
 		setTextForTranslation(e.target.value)
 		detect(e.target.value)
 		debounce(e.target.value)
-	}
-
-	const addHistoryItem = (e) => {
-		e.preventDefault()
-		const newHistoryObj = {
-			...historyItem, id: Date.now()
-		}
-		console.log(newHistoryObj)
-		createHistoryItem(newHistoryObj)
 	}
 
 	const addFavouriteItem = (e) => {
@@ -89,10 +92,8 @@ const TextArea = ({
 	}
 
 	useEffect(() => {
-		setHistoryItem({ inputLanguage: inputLanguage.label, outputLanguage: outputLanguage.label, textForTranslation: textForTranslation, translatedText })
 		setFavouriteItem({ inputLanguage: inputLanguage.label, outputLanguage: outputLanguage.label, textForTranslation: textForTranslation, translatedText: translatedText })
 	}, [inputLanguage, outputLanguage, textForTranslation, translatedText])
-
 
 	return (
 		<div className={style}>
@@ -135,8 +136,8 @@ const TextArea = ({
 				className={classes.textarea}
 				disabled={style === 'outputTextarea'}
 				value={style === 'inputTextarea' ? textForTranslation : translatedText}
+				onBlur={create}
 				onChange={handleChange}
-				onBlur={addHistoryItem}
 				{...props}
 			/>
 			<ToastContainer

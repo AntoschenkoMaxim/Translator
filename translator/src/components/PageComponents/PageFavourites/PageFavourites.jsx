@@ -26,7 +26,7 @@ const PageFavourites = () => {
 		<div className='page' data-theme={theme}>
 			<div className={classes.theme} onClick={switchTheme}>{theme === 'dark' ? <BsLightningCharge className={classes.theme__icon} /> : <BsLightningChargeFill className={classes.theme__icon} />}</div>
 			<TranslationFilter filter={filter} setFilter={setFilter} title='Filters' button='Translator' path='/' />
-			<FavouriteList favouriteItems={sortedAndSearchedItems} title='Favourite history' />
+			<FavouriteList favouriteItems={sortedAndSearchedItems} title='Favourite history:' />
 		</div>
 	)
 }

@@ -20,11 +20,12 @@ import 'react-toastify/dist/ReactToastify.css'
 function PageTranslator() {
 
   const [detectedLanguage, setDetectedLanguage] = useState({ value: '' })
-  const [inputLanguage, setInputLanguage] = useState({ value: 'en', language: 'English' })
-  const [outputLanguage, setOutputLanguage] = useState({ value: 'ru', language: 'Russian' })
+  const [inputLanguage, setInputLanguage] = useState({ value: 'en', label: 'English' })
+  const [outputLanguage, setOutputLanguage] = useState({ value: 'ru', label: 'Russian' })
   const [languages, setLanguages] = useState([])
   const [textForTranslation, setTextForTranslation] = useState('')
   const [translatedText, setTranslatedText] = useState('')
+  const [historyItem, setHistoryItem] = useLocalStorageCustom('history', { inputLanguage: '', outputLanguage: '', textForTranslation: '', translatedText: '' })
   const [historyItems, setHistoryItems] = useLocalStorageCustom('historyItems', [])
   const [favouriteItems, setFavouriteItems] = useLocalStorageCustom('favouriteItems', [])
   const [filter, setFilter] = useState({ sort: '', query: '' })
@@ -100,13 +101,21 @@ function PageTranslator() {
 
   const debouncedQuery = useDebounce(translate, 300)
 
-  const createHistoryItem = (newHistoryItem) => {
-    setHistoryItems([...historyItems, newHistoryItem])
-  }
-
   const createFavouriteItem = (newFavouriteItem) => {
     setFavouriteItems([...favouriteItems, newFavouriteItem])
   }
+
+  const createHistoryItem = () => {
+    const newHistoryItem = {
+      ...historyItem,
+      id: Date.now()
+    }
+    setHistoryItems([...historyItems, newHistoryItem])
+  }
+
+  useEffect(() => {
+    setHistoryItem({ inputLanguage: inputLanguage.label, outputLanguage: outputLanguage.label, textForTranslation: textForTranslation, translatedText: translatedText })
+  }, [inputLanguage, outputLanguage, textForTranslation, translatedText])
 
   //get languages
   useEffect(() => {
@@ -123,8 +132,6 @@ function PageTranslator() {
     setTheme(newTheme)
   }
 
-  console.log(historyItems)
-
   return (
     <div className='page' data-theme={theme}>
       <div className={classes.theme} onClick={switchTheme}>{theme === 'dark' ? <BsLightningCharge className={classes.theme__icon} /> : <BsLightningChargeFill className={classes.theme__icon} />}</div>
@@ -140,19 +147,20 @@ function PageTranslator() {
         setInputLanguage={setInputLanguage}
         setOutputLanguage={setOutputLanguage}
         detect={detect}
+        create={createHistoryItem}
         createFavouriteItem={createFavouriteItem}
-        createHistoryItem={createHistoryItem}
       />
       {isError &&
         <h1>Error: ${isError}</h1>
       }
       {isLoading
-        ? <div></div>//прикрутить loader
+        ? <div></div>
         : <div className={classes.translation__list}>
           <TranslationFilter filter={filter} setFilter={setFilter} title='Filters' button='Favourite' path='/favourites' />
           <HistoryList historyItems={sortedAndSearchedItems} title='Translation history: ' />
         </div>
       }
+
       <ToastContainer
         position="top-center"
         autoClose={1000}
@@ -164,6 +172,7 @@ function PageTranslator() {
         draggable
         pauseOnHover
       />
+
     </div>
   )
 }
