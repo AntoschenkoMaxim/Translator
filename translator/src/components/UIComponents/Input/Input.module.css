@@ -1,0 +1,9 @@
+.input {
+	font-size: calc(14px + (6-14) * ((100vw - 320px) / (1200-320)));
+	border-radius: 5px;
+	box-sizing: border-box;
+	color: var(--text-primary);
+	background-color: var(--text-secondary);
+	padding: 8px 18px;
+	outline: none;
+}
